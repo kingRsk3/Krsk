@@ -1,0 +1,647 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>KING RSK AKARA & KULI KULI HUB</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #f8f6f2;
+      color: #1e1e1e;
+    }
+
+    /* modern orange/gold theme */
+    :root {
+      --primary: #f68b1e;
+      --primary-dark: #d97a12;
+      --gold: #f9b83a;
+      --gold-light: #fde6b3;
+      --accent: #ffb347;
+      --bg-light: #fffaf2;
+      --shadow: 0 8px 20px rgba(0,0,0,0.06);
+      --radius: 16px;
+    }
+
+    /* sticky header */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: white;
+      box-shadow: 0 2px 16px rgba(246, 139, 30, 0.15);
+      padding: 12px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 2px solid var(--gold-light);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.3px;
+      color: #2d1f0c;
+      flex-wrap: wrap;
+    }
+    .brand span:first-child {
+      color: var(--primary);
+    }
+    .brand small {
+      font-weight: 400;
+      font-size: 0.7rem;
+      background: var(--gold);
+      padding: 2px 10px;
+      border-radius: 40px;
+      color: #2d1f0c;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-left: auto;
+    }
+
+    .cart-icon {
+      position: relative;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #3d2b13;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+    }
+    .cart-icon:hover { transform: scale(1.05); color: var(--primary); }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -12px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 30px;
+      border: 2px solid white;
+      min-width: 22px;
+      text-align: center;
+    }
+
+    .wishlist-heart {
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: #b0a090;
+      transition: 0.15s;
+      line-height: 1;
+    }
+    .wishlist-heart:hover { color: #e63946; transform: scale(1.1); }
+
+    /* search */
+    .search-wrap {
+      flex: 1 1 260px;
+      min-width: 160px;
+      display: flex;
+      background: #f3efe8;
+      border-radius: 60px;
+      padding: 4px 4px 4px 16px;
+      border: 1px solid #e5ddd0;
+      transition: 0.2s;
+    }
+    .search-wrap:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(246, 139, 30, 0.25);
+      background: white;
+    }
+    .search-wrap input {
+      border: none;
+      background: transparent;
+      padding: 10px 0;
+      font-size: 0.95rem;
+      width: 100%;
+      outline: none;
+    }
+    .search-wrap button {
+      background: var(--primary);
+      border: none;
+      border-radius: 60px;
+      padding: 8px 18px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.15s;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+    }
+    .search-wrap button:hover { background: var(--primary-dark); }
+
+    /* hero banner */
+    .hero-banner {
+      background: linear-gradient(145deg, #f9d9a5, #f7b773);
+      margin: 16px 20px 20px;
+      padding: 30px 28px;
+      border-radius: var(--radius);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+      border-left: 6px solid var(--primary);
+    }
+    .hero-text h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #2d1f0c;
+      letter-spacing: -0.5px;
+    }
+    .hero-text p {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+    .hero-badge {
+      background: #2d1f0c;
+      color: var(--gold);
+      padding: 10px 22px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 0 #0f0a05;
+    }
+
+    /* categories */
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      padding: 0 20px 20px;
+      justify-content: center;
+    }
+    .category-chip {
+      background: white;
+      border: 1px solid #e8dfd2;
+      padding: 8px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      color: #3d2b13;
+      box-shadow: var(--shadow);
+      transition: 0.15s;
+      cursor: default;
+    }
+    .category-chip:hover {
+      background: var(--gold-light);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* flash sale */
+    .flash-sale {
+      background: #fff6e5;
+      margin: 0 20px 24px;
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      border-left: 6px solid #e63946;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .flash-sale h2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.4rem;
+    }
+    .countdown {
+      background: #1e1e1e;
+      color: white;
+      padding: 6px 18px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+    }
+
+    /* product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 24px;
+      padding: 0 20px 40px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 16px 12px 16px;
+      box-shadow: var(--shadow);
+      transition: 0.25s ease;
+      border: 1px solid #f0ebe3;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 16px 32px rgba(246, 139, 30, 0.12);
+      border-color: var(--gold);
+    }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      background: #f6f0e7;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #4a3722;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 4px;
+      background-image: repeating-linear-gradient(45deg, #faf3e8 0px, #faf3e8 6px, #f3e9db 6px, #f3e9db 12px);
+      background-blend-mode: overlay;
+      margin-bottom: 10px;
+      position: relative;
+      border: 1px solid #e4dacb;
+    }
+    .product-img span {
+      background: rgba(255,255,245,0.7);
+      padding: 6px 12px;
+      border-radius: 40px;
+      backdrop-filter: blur(2px);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .badge-rsk {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 8px rgba(246,139,30,0.4);
+    }
+    .discount-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #e63946;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 40px;
+    }
+
+    .product-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin: 6px 0 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .product-price {
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: #1e1e1e;
+    }
+    .old-price {
+      font-size: 0.8rem;
+      color: #7f6e5a;
+      text-decoration: line-through;
+      margin-left: 8px;
+      font-weight: 400;
+    }
+
+    .rating {
+      color: #f9b83a;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .rating span {
+      color: #4a3722;
+      font-weight: 500;
+      font-size: 0.75rem;
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      gap: 6px;
+    }
+    .add-to-cart {
+      background: var(--primary);
+      border: none;
+      color: white;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.15s;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .add-to-cart:hover {
+      background: var(--primary-dark);
+      transform: scale(1.02);
+    }
+    .wishlist-icon {
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #b0a090;
+      transition: 0.1s;
+      line-height: 1;
+      padding: 4px;
+    }
+    .wishlist-icon:hover { color: #e63946; transform: scale(1.2); }
+
+    /* footer */
+    .footer {
+      background: #1e1a14;
+      color: #ddcebc;
+      padding: 32px 20px 20px;
+      margin-top: 16px;
+      border-top: 6px solid var(--gold);
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .footer-col h4 {
+      color: #f9b83a;
+      margin-bottom: 8px;
+    }
+    .footer-col p { font-size: 0.9rem; opacity: 0.8; }
+    .footer-copy {
+      text-align: center;
+      margin-top: 24px;
+      border-top: 1px solid #3d3228;
+      padding-top: 18px;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    @media (max-width: 700px) {
+      .sticky-header { flex-direction: column; align-items: stretch; }
+      .header-actions { justify-content: flex-end; }
+      .hero-text h1 { font-size: 1.4rem; }
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <!-- sticky header -->
+  <header class="sticky-header">
+    <div class="brand">
+      <span>KING RSK</span>
+      <span style="color:#d97a12;">AKARA</span>
+      <span style="color:#b8860b;">&</span>
+      <span style="color:#c97d1a;">KULI KULI</span>
+      <small>HUB</small>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="Search products...">
+      <button id="searchBtn">🔍</button>
+    </div>
+    <div class="header-actions">
+      <span class="wishlist-heart">♡</span>
+      <div class="cart-icon">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- hero -->
+  <div class="hero-banner">
+    <div class="hero-text">
+      <h1>🔥 Akara & Kuli Kuli Bliss</h1>
+      <p>Handcrafted • 50+ flavors • RSK exclusive</p>
+    </div>
+    <div class="hero-badge">⭐ RSK EXCLUSIVE</div>
+  </div>
+
+  <!-- categories -->
+  <div class="categories">
+    <span class="category-chip">🍓 Akara</span>
+    <span class="category-chip">🥜 Kuli Kuli</span>
+    <span class="category-chip">⭐ Best Sellers</span>
+    <span class="category-chip">🌈 Rainbow</span>
+    <span class="category-chip">🍫 Chocolate</span>
+    <span class="category-chip">🍯 Honey</span>
+  </div>
+
+  <!-- flash sale -->
+  <div class="flash-sale">
+    <h2>⚡ Flash Sale <span style="font-size:0.9rem;font-weight:400;">ends in</span></h2>
+    <div class="countdown" id="countdownTimer">02:15:30</div>
+  </div>
+
+  <!-- product grid -->
+  <div class="product-grid" id="productGrid"></div>
+
+  <!-- footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col"><h4>KING RSK HUB</h4><p>Authentic Akara & Kuli Kuli since 2024</p></div>
+      <div class="footer-col"><h4>📍 Lagos • Abuja • PH</h4><p>Delivery across Nigeria</p></div>
+      <div class="footer-col"><h4>📞 +234 800 RSK HUB</h4><p>support@rskakara.com</p></div>
+    </div>
+    <div class="footer-copy">© 2026 KING RSK AKARA & KULI KULI HUB — All rights reserved.</div>
+  </footer>
+
+  <script>
+    (function() {
+      // ---------- PRODUCT DATA (20 Akara + 20 Kuli Kuli) ----------
+      const productNames = [
+        // Akara (20)
+        "Strawberry Akara", "Mango Flavor Akara", "Chocolate Akara", "Honey Glazed Akara",
+        "Coconut Akara", "Pineapple Akara", "Banana Akara", "Blueberry Akara",
+        "Rainbow Sprinkle Akara", "Vanilla Dream Akara", "Caramel Akara", "Peanut Butter Akara",
+        "Cinnamon Akara", "Matcha Akara", "Orange Zest Akara", "Lemon Burst Akara",
+        "Pistachio Akara", "Maple Akara", "Toffee Akara", "Mint Choco Akara",
+        // Kuli Kuli (20)
+        "Strawberry Kuli Kuli", "Mango Flavor Kuli Kuli", "Chocolate Kuli Kuli", "Honey Kuli Kuli",
+        "Blueberry Kuli Kuli", "Rainbow Kuli Kuli", "Coconut Kuli Kuli", "Pineapple Kuli Kuli",
+        "Banana Kuli Kuli", "Vanilla Kuli Kuli", "Caramel Kuli Kuli", "Peanut Kuli Kuli",
+        "Cinnamon Kuli Kuli", "Matcha Kuli Kuli", "Orange Kuli Kuli", "Lemon Kuli Kuli",
+        "Pistachio Kuli Kuli", "Maple Kuli Kuli", "Toffee Kuli Kuli", "Mint Kuli Kuli"
+      ];
+
+      // generate random price, old price, rating, exclusive
+      function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+      const products = productNames.map((name, idx) => {
+        const price = rand(1200, 4500);
+        const discount = rand(0, 30);
+        const oldPrice = discount > 0 ? Math.round(price * (1 + discount/100)) : null;
+        const rating = (rand(35, 50) / 10).toFixed(1);
+        const isExclusive = idx % 3 === 0 || idx % 7 === 0; // RSK exclusive badge
+        const isDiscount = discount > 12;
+        const category = name.includes('Kuli') ? 'Kuli Kuli' : 'Akara';
+        // colorful placeholder image: emoji + bg
+        const emoji = name.includes('Strawberry')?'🍓':name.includes('Mango')?'🥭':name.includes('Chocolate')?'🍫':
+                      name.includes('Honey')?'🍯':name.includes('Coconut')?'🥥':name.includes('Pineapple')?'🍍':
+                      name.includes('Banana')?'🍌':name.includes('Blueberry')?'🫐':name.includes('Rainbow')?'🌈':
+                      name.includes('Vanilla')?'🍦':name.includes('Caramel')?'🍮':name.includes('Peanut')?'🥜':
+                      name.includes('Cinnamon')?'🌰':name.includes('Matcha')?'🍵':name.includes('Orange')?'🍊':
+                      name.includes('Lemon')?'🍋':name.includes('Pistachio')?'🟢':name.includes('Maple')?'🍁':
+                      name.includes('Toffee')?'🍬':name.includes('Mint')?'🌿':'🍡';
+        return {
+          id: idx,
+          name,
+          price,
+          oldPrice,
+          rating: parseFloat(rating),
+          exclusive: isExclusive,
+          discount: isDiscount ? `${discount}%` : '',
+          category,
+          emoji,
+          imgLabel: `${emoji} ${name}`,
+        };
+      });
+
+      // ---------- RENDER ----------
+      const grid = document.getElementById('productGrid');
+      let cartCount = 0;
+      const cartCountEl = document.getElementById('cartCount');
+
+      function renderProducts(filter = '') {
+        const q = filter.trim().toLowerCase();
+        let html = '';
+        let filtered = products;
+        if (q) {
+          filtered = products.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+        }
+        filtered.forEach(p => {
+          const stars = '⭐'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '☆' : '');
+          const oldPriceHtml = p.oldPrice ? `<span class="old-price">₦${p.oldPrice.toLocaleString()}</span>` : '';
+          const discountHtml = p.discount ? `<span class="discount-badge">-${p.discount}</span>` : '';
+          const exclusiveHtml = p.exclusive ? `<span class="badge-rsk">RSK Exclusive</span>` : '';
+
+          html += `
+            <div class="product-card" data-name="${p.name.toLowerCase()}">
+              <div class="product-img">
+                <span>${p.emoji} ${p.name}</span>
+                ${exclusiveHtml}
+                ${discountHtml}
+              </div>
+              <div class="product-title">${p.name}</div>
+              <div class="product-price">₦${p.price.toLocaleString()} ${oldPriceHtml}</div>
+              <div class="rating">${stars} <span>(${p.rating})</span></div>
+              <div class="card-actions">
+                <button class="add-to-cart" data-id="${p.id}">🛒 Add</button>
+                <span class="wishlist-icon" data-id="${p.id}">♡</span>
+              </div>
+            </div>
+          `;
+        });
+        grid.innerHTML = html || '<p style="grid-column:1/-1;padding:40px;text-align:center;font-size:1.2rem;color:#7f6e5a;">✨ No products found. Try a different search.</p>';
+      }
+
+      renderProducts();
+
+      // ---------- SEARCH ----------
+      const searchInput = document.getElementById('searchInput');
+      const searchBtn = document.getElementById('searchBtn');
+
+      function handleSearch() {
+        renderProducts(searchInput.value);
+      }
+      searchBtn.addEventListener('click', handleSearch);
+      searchInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') handleSearch(); });
+
+      // ---------- CART COUNT & ADD TO CART (delegation) ----------
+      grid.addEventListener('click', (e) => {
+        const btn = e.target.closest('.add-to-cart');
+        if (btn) {
+          cartCount++;
+          cartCountEl.textContent = cartCount;
+          // subtle feedback
+          btn.textContent = '✅ Added';
+          setTimeout(() => { btn.innerHTML = '🛒 Add'; }, 800);
+          return;
+        }
+        // wishlist heart toggle
+        const heart = e.target.closest('.wishlist-icon');
+        if (heart) {
+          if (heart.textContent === '♡') {
+            heart.textContent = '❤️';
+            heart.style.color = '#e63946';
+          } else {
+            heart.textContent = '♡';
+            heart.style.color = '#b0a090';
+          }
+        }
+      });
+
+      // ---------- FLASH SALE COUNTDOWN (2h countdown) ----------
+      let totalSeconds = 2 * 3600 + 15 * 60 + 30; // 2:15:30
+      const timerEl = document.getElementById('countdownTimer');
+
+      function updateTimer() {
+        if (totalSeconds <= 0) {
+          timerEl.textContent = '🔥 SOLD OUT';
+          return;
+        }
+        const h = Math.floor(totalSeconds / 3600);
+        const m = Math.floor((totalSeconds % 3600) / 60);
+        const s = totalSeconds % 60;
+        timerEl.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        totalSeconds--;
+      }
+      updateTimer();
+      setInterval(updateTimer, 1000);
+
+      // ---------- ADDITIONAL: wishlist heart in header (dummy) ----------
+      document.querySelector('.wishlist-heart')?.addEventListener('click', function() {
+        alert('❤️ Your wishlist (demo) — heart items to save them!');
+      });
+
+      // cart icon click
+      document.querySelector('.cart-icon')?.addEventListener('click', function() {
+        alert(`🛒 You have ${cartCount} item(s) in your cart.`);
+      });
+
+      // re-run cart count update if any external
+      console.log('KING RSK AKARA & KULI KULI HUB loaded');
+    })();
+  </script>
+</body>
+</html>
+```
